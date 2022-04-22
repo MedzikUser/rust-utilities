@@ -3,7 +3,7 @@
 //! your application, simply add it to your project's `Cargo.toml`.
 //! ```toml
 //! [dependencies]
-//! rust_utilities = "0.1.0"
+//! rust_utilities = "0.2.0"
 //! ```
 //!
 //! ## How to use?
@@ -12,8 +12,8 @@
 //!
 //! Add `sha` features
 //! ```toml
-//! [dependencies]
-//! rust_utilities = "0.1.0"
+//! [dependencies.rust_utilities]
+//! version = "0.2.0"
 //! features = ["sha"]
 //! ```
 //!
