@@ -12,9 +12,14 @@ edition = "2021"
 [features]
 default = ["full"]
 
-full = ["crypto", "sha"]
+full = ["crypto", "sha", "jsonwebtoken"]
 crypto = []
-sha = ["sha-1", "sha2", "hex"]
+sha = ["sha-1", "sha2", "hex", "crypto"]
+jsonwebtoken = ["dep:jsonwebtoken", "chrono", "crypto"]
+
+[dependencies.serde]
+version = "1.0.136"
+features = ["derive"]
 
 # crypto
 [dependencies.sha-1]
@@ -25,4 +30,10 @@ version = "0.10.2"
 optional = true
 [dependencies.hex]
 version = "0.4.3"
+optional = true
+[dependencies.jsonwebtoken]
+version = "8.1.0"
+optional = true
+[dependencies.chrono]
+version = "0.4.19"
 optional = true

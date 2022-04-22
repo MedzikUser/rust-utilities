@@ -3,6 +3,7 @@ use sha2::{Digest, Sha256, Sha512};
 
 pub use hex::encode;
 
+/// Hashing algorithm
 pub enum Algorithm {
     SHA1,
     SHA256,
@@ -10,6 +11,8 @@ pub enum Algorithm {
 }
 
 /// create a cryptographic hash from a string (sha1, sha256, sha512)
+///
+/// **Method 1:**
 /// ```
 /// use rust_utilities::crypto::sha::{Algorithm, CryptographicHash};
 ///
@@ -17,6 +20,15 @@ pub enum Algorithm {
 /// sha1.update(b"test sha1 hash");
 ///
 /// let hash = hex::encode(sha1.finalize());
+///
+/// assert_eq!(hash, "7726bd9560e1ad4a1a4f056cae5c0c9ea8bacfc2".to_string())
+/// ```
+///
+/// **Method 2:**
+/// ```
+/// use rust_utilities::crypto::sha::{Algorithm, CryptographicHash};
+///
+/// let hash = hex::encode(CryptographicHash::hash(Algorithm::SHA1, b"test sha1 hash"));
 ///
 /// assert_eq!(hash, "7726bd9560e1ad4a1a4f056cae5c0c9ea8bacfc2".to_string())
 /// ```
