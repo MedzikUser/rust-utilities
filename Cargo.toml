@@ -1,7 +1,11 @@
 [package]
 name = "rust_utilities"
+description = "Utilities for Rust"
 authors = ["MedzikUser <nivua1fn@duck.com>"]
 license = "MIT"
+keywords = ["crypto", "cryptography"]
+homepage = "https://github.com/MedzikUser/rust-utilities"
+repository = "https://github.com/MedzikUser/rust-utilities.git"
 version = "0.1.0"
 edition = "2021"
 
