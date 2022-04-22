@@ -1,3 +1,20 @@
+//! **Required `sha` feature!**
+//!
+//! Module responsible for creating sha1, sha256 and sha512 hashes
+//!
+//! Examples:
+//! ```
+//! use rust_utilities::crypto::sha::{Algorithm, CryptographicHash};
+//!
+//! let input = "test";
+//! // compute `sha1` hash
+//! CryptographicHash::hash(Algorithm::SHA1,   input.as_bytes());
+//! // compute `sha256` hash
+//! CryptographicHash::hash(Algorithm::SHA256, input.as_bytes());
+//! // compute `sha512` hash
+//! CryptographicHash::hash(Algorithm::SHA512, input.as_bytes());
+//! ```
+
 use sha1::Sha1;
 use sha2::{Digest, Sha256, Sha512};
 
@@ -10,7 +27,7 @@ pub enum Algorithm {
     SHA512,
 }
 
-/// create a cryptographic hash from a string (sha1, sha256, sha512)
+/// create a cryptographic hash from a bytes (sha1, sha256, sha512)
 ///
 /// **Method 1:**
 /// ```

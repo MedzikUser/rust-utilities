@@ -18,10 +18,10 @@
 //! ```
 //!
 //! Quick and easy sha1, sha256 and sha512 hash calculation.
-//! ```rs
+//! ```
 //! use rust_utilities::crypto::sha::{Algorithm, CryptographicHash};
 //!
-//! let text = "test" // &str
+//! let text = "test"; // &str
 //!
 //! let hash = hex::encode(CryptographicHash::hash(Algorithm::SHA1, text.as_bytes())); // String
 //!

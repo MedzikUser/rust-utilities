@@ -23,7 +23,7 @@ features = ["sha"]
 
 Quick and easy sha1, sha256 and sha512 hash calculation.
 
-```rs
+```rust
 use rust_utilities::crypto::sha::{Algorithm, CryptographicHash};
 
 let text = "test" // &str
