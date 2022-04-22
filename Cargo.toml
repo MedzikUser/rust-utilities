@@ -1,6 +1,7 @@
 [package]
 name = "rust_utilities"
 authors = ["MedzikUser <nivua1fn@duck.com>"]
+license = "MIT"
 version = "0.1.0"
 edition = "2021"
 
