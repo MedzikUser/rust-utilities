@@ -5,6 +5,7 @@ use jsonwebtoken::{
 };
 use serde::{Deserialize, Serialize};
 
+/// JWT Claims
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Claims {
     pub sub: String,
@@ -18,11 +19,11 @@ impl Claims {
     /// use rust_utilities::crypto::jsonwebtoken::Claims;
     ///
     /// let user_id = "123".to_string();
-    /// let claims = Claims::new(user_id);
+    /// let claims = Claims::new(user_id, 24);
     /// ```
-    pub fn new(sub: String) -> Self {
+    pub fn new(sub: String, expire_hours: i64) -> Self {
         let iat = Utc::now();
-        let exp = iat + Duration::hours(24);
+        let exp = iat + Duration::hours(expire_hours);
 
         Self {
             sub,
@@ -46,7 +47,7 @@ impl Token {
     ///
     /// let secret = b"secret";
     ///
-    /// let claims = Claims::new("user_id_1234".to_string());
+    /// let claims = Claims::new("user_id_1234".to_string(), 1);
     /// let token = Token::new(secret, claims).unwrap();
     /// ```
     pub fn new(key: &[u8], claims: Claims) -> Result<Self, Error> {
@@ -66,7 +67,7 @@ impl Token {
     ///
     /// let secret = b"secret";
     ///
-    /// let claims = Claims::new("user_id_1234".to_string());
+    /// let claims = Claims::new("user_id_1234".to_string(), 1);
     /// let token = Token::new(secret, claims).unwrap();
     /// let decoded = Token::decode(secret, token.encoded).unwrap();
     /// ```
@@ -86,12 +87,22 @@ mod test {
     #[test]
     fn decode_token_invalid_secret() {
         let key = b"key";
-        let token = Token::new(key, Claims::new("test".to_string())).expect("generate token");
+        let token = Token::new(key, Claims::new("test".to_string(), 1)).expect("generate token");
 
         let other_key = b"other key";
 
         let err = Token::decode(other_key, token.encoded).unwrap_err();
 
         assert_eq!(err.to_string(), "InvalidSignature");
+    }
+
+    #[test]
+    fn decode_token_expired() {
+        let key = b"key";
+        let token = Token::new(key, Claims::new("test".to_string(), -1)).expect("generate token");
+
+        let err = Token::decode(key, token.encoded).unwrap_err();
+
+        assert_eq!(err.to_string(), "ExpiredSignature");
     }
 }
